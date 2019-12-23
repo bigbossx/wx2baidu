@@ -124,7 +124,7 @@ function buildGraph(tree, graph, from) {
         const {type, name, attribs, children = []} = tree;
         if (type === 'tag' && (name === 'import' || name === 'include') && attribs.src) {
             let dep = path.resolve(path.dirname(from), attribs.src);
-            dep = dep.replace(/\.xml/, '.swan');
+            dep = dep.replace(/\.wxml/, '.swan');
             dep = dep.endsWith('.swan') ? dep : `${dep}.swan`;
             graph.addNode(dep);
             graph.addDependency(from, dep);

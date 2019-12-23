@@ -9,7 +9,6 @@ const chalk = require('chalk');
 const json = require('./src/config');
 const api = require('./src/api');
 const view = require('./src/view');
-const css = require('./src/css');
 const utils = require('./src/util/index');
 const log = require('./src/util/log');
 
@@ -39,18 +38,17 @@ module.exports = function wxmp2swan(pathObj, cb) {
         yield json.transformConfig(context);
         yield api.transformApi(context);
         yield view.transformView(context);
-        yield css.transformCss(context);
         yield utils.createWx2swaninfo(pathObj.dist);
     }).then(function () {
         log.saveLog(pathObj.log);
         // utils.saveLog(`${pathObj.log}/log.json`, JSON.stringify(context.logs, null, 4));
         cb && cb(null);
-        console.log(chalk.green('🎉    Ok, transform done, check transform log in ')
+        console.log(chalk.green('🎉    Ok,vision, transform done, check transform log in ')
                     + chalk.blue.underline.bold('log.json')
         );
     }).catch(function (e) {
         cb && cb(e);
-        console.log(chalk.red('🚀    run error: ', e));
+        console.log(chalk.red('🚀    vision run error: ', e));
     });
 };
 

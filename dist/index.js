@@ -83,7 +83,7 @@ module.exports = function wxmp2swan(pathObj, cb) {
         log.saveLog(pathObj.log);
         // utils.saveLog(`${pathObj.log}/log.json`, JSON.stringify(context.logs, null, 4));
         cb && cb(null);
-        console.log(chalk.green('🎉    Ok, transform done, check transform log in ') + chalk.blue.underline.bold('log.json'));
+        console.log(chalk.green('🎉    Ok,visionM, transform done, check transform log in ') + chalk.blue.underline.bold('log.json'));
     }).catch(function (e) {
         cb && cb(e);
         console.log(chalk.red('🚀    run error: ', e));

@@ -10,9 +10,10 @@ const path = require('path');
 const vfile = require('vfile');
 
 const swanFileSuffix = 'swan';
-const cssFileSuffix = 'css';
+const cssFileSuffix = 'less';
 const jsFileSuffix = 'js';
 const configFileSuffix = 'json';
+const wxsFileSuffix=".sjs"
 
 
 /**
@@ -56,7 +57,8 @@ function copyDirectory(fromPath, toPath) {
         arr.push(
             recursiveCopy(
                 path.join(fromPath, lists[i]),
-                path.join(toPath, lists[i].replace(/xml$/, swanFileSuffix).replace(/wxss$/, cssFileSuffix)),
+                path.join(toPath, lists[i].replace(/xml|wxml$/, swanFileSuffix)),
+                // path.join(toPath, lists[i].replace(/xml$/, swanFileSuffix).replace(/less$/, cssFileSuffix)),
                 options
             )
         );
@@ -89,11 +91,12 @@ function copyFile(fromPath, toPath) {
  * @return {string} 处理后路径
  */
 function renameFileExt(filePath) {
-    if (/xml/.test(filePath)) {
-        return filePath.replace(/xml$/, swanFileSuffix);
+    if (/xml|wxml/.test(filePath)) {
+        return filePath.replace(/xml|wxml$/, swanFileSuffix);
     }
-    else if (/wxss/.test(filePath)) {
-        return filePath.replace(/wxss$/, cssFileSuffix);
+    else if (/\.wxs/.test(filePath)) {
+      console.log(filePath)
+        return filePath.replace(/\.wxs$/, wxsFileSuffix);
     }
     else {
         return filePath;

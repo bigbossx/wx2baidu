@@ -31,6 +31,10 @@ module.exports = function wxmlToSwan(options = {}) {
                 tree = tranformImport(tree, file, options);
             }
 
+            if (name === 'wxs') {
+                tree = tranformWxs(tree, file, options);
+            }
+
             // template data属性的值需要包一层花括号
             if (name === 'template' && attribs.data) {
                 tree = tranformTemplate(tree, file, options);
@@ -64,6 +68,23 @@ module.exports = function wxmlToSwan(options = {}) {
     }
 };
 
+function tranformWxs(node, file, options){
+  const attribs = node.attribs;
+  if (attribs && attribs.src) {
+      let src = attribs.src.replace(/\.wxs$/i, '.sjs');
+      return {
+          ...node,
+          attribs: {
+              ...attribs,
+              src: src
+          }
+      };
+  }
+  node.name="import-sjs"
+  return node;
+}
+
+
 /**
  * 转换import和include标签
  *
@@ -75,7 +96,7 @@ module.exports = function wxmlToSwan(options = {}) {
 function tranformImport(node, file, options) {
     const attribs = node.attribs;
     if (attribs && attribs.src) {
-        let src = attribs.src.replace(/\.xml$/i, '.swan');
+        let src = attribs.src.replace(/\.wxml$/i, '.swan');
         // src中没有扩展名的添加默认扩展名.swan
         if (!/\w+\.\w+$/.test(src)) {
             src = src + '.swan';

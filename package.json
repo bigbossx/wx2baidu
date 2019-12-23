@@ -27,7 +27,7 @@
     "name": "yican"
   },
   "bin": {
-    "wx2swan": "./dist/bin/cli.js"
+    "wx2swan": "./bin/cli.js"
   },
   "bundleDependencies": false,
   "dependencies": {

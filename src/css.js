@@ -23,6 +23,7 @@ exports.transformCss = function* transformCss(form) {
             filePath = filePath + '/**/*.' + ext;
         }
         const extname = path.extname(filePath);
+        console.log(extname)
         if (extname === '.' + ext) {
             glob(filePath, function (err, files) {
                 resolve(err ? [] : files);
