@@ -70,6 +70,7 @@ module.exports = function wxmlToSwan(options = {}) {
 
 function tranformWxs(node, file, options){
   const attribs = node.attribs;
+  node.name="import-sjs"
   if (attribs && attribs.src) {
       let src = attribs.src.replace(/\.wxs$/i, '.sjs');
       return {
@@ -80,7 +81,6 @@ function tranformWxs(node, file, options){
           }
       };
   }
-  node.name="import-sjs"
   return node;
 }
 
